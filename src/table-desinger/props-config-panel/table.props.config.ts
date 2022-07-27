@@ -17,58 +17,16 @@ const fields: SchemaProps<{
     label: '空数据提示文案',
   },
   {
-    type: 'RadioGroup',
-    name: 'size',
-    label: '尺寸大小',
-    props: {
-      optionType: 'button',
-      options: [
-        {
-          label: 'small',
-          value: 'small',
-        },
-        {
-          label: 'middle',
-          value: 'middle',
-        },
-      ],
-    },
-  },
-  {
     type: 'BlockQuote',
     props: {
       title: '顶部工具栏设置',
     },
   },
   {
-    type: 'RadioGroup',
-    name: 'toolsAlign',
-    label: '工具栏位置',
-    props: {
-      optionType: 'button',
-      options: [
-        {
-          label: '左对齐',
-          value: 'left',
-        },
-        {
-          label: '右对齐',
-          value: 'right',
-        },
-      ],
-    },
-  },
-  {
     type: 'Switch',
-    name: 'useRefresh',
+    name: 'useDefaultTools',
     valuePropName: 'checked',
-    label: '启用刷新',
-  },
-  {
-    type: 'Switch',
-    name: 'useFilterColumns',
-    valuePropName: 'checked',
-    label: '启用过滤',
+    label: '启用默认操作栏',
   },
   {
     type: 'FormList',
@@ -201,7 +159,7 @@ const fields: SchemaProps<{
     return {
       ...item,
       effect: ['pagination'],
-      isShow({ pagination }) {
+      visible({ pagination }) {
         return pagination;
       },
     };
@@ -215,17 +173,17 @@ const fields: SchemaProps<{
   {
     type: 'BindFunction',
     name: 'request',
-    label: '数据查询事件',
+    label: '设置request',
   },
   {
     type: 'BindFunction',
     name: 'toolsClick',
-    label: '工具栏事件',
+    label: '设置toolsClick',
   },
   {
     type: 'BindFunction',
     name: 'rowOperationsClick',
-    label: '列操作栏事件',
+    label: '设置rowOperationsClick',
   },
 ];
 

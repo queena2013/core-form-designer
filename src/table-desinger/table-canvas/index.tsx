@@ -25,6 +25,7 @@ export default ({
   defaultSelectKey = '',
   style = {},
 }: FormCanvasType) => {
+  const [reload, setReload] = useState(Math.random());
   const ctx: any = useContext(Ctx); // 拿到ctx
   // update ctx
   useEffect(() => {
@@ -33,7 +34,6 @@ export default ({
       defaultSchema.find((item: any) => item.key === defaultSelectKey) || {};
     ctx.setSelectSchema(selectSchema);
   }, []);
-  const [reload, setReload] = useState(Math.random());
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept,
@@ -88,10 +88,10 @@ export default ({
               schema={ctx.schema}
               selected={ctx.selectSchema.key === itemSchema.key} // 是否选中
               onSchemaUpdate={(schema) => {
-                ctx.setSchema(schema); // ctx
+                ctx.setSchema(schema);
               }}
               setSelectSchema={(i: any) => {
-                ctx.setSelectSchema(i); // ctx
+                ctx.setSelectSchema(i);
                 onSchemaSelect(i); // 通知外面
               }}
             >
@@ -119,20 +119,45 @@ export default ({
   useEffect(() => {
     setReload(Math.random());
   }, [ctx.widgets, ctx.selectSchema.key, _schema]);
+  const cls = ['table-canvas'];
+  if (ctx.formProps.hidden) {
+    cls.push('table-canvas-hidden-search');
+  }
   return (
-    <div ref={drop} className="table-canvas" style={style}>
-      {isOver && <div className="form-canvas-mask" />}
+    <div ref={drop} className={cls.join(' ')} style={style}>
+      {isOver && <div className="table-canvas-mask" />}
       {_schema.length === 0 ? (
         <Empty
           image={Empty.PRESENTED_IMAGE_SIMPLE}
           description={empty}
-          className="form-canvas-empty"
+          className="table-canvas-empty"
         />
       ) : (
         <Table
           key={reload}
           columns={ctx.columns}
+          searchSchema={{
+            ...ctx.formProps,
+            hidden: false,
+            schema: _schema,
+          }}
           {...parseTableSchema(cloneDeep(ctx?.tableProps))}
+          tableRender={(dom) => {
+            return (
+              <div
+                className={
+                  ctx.selectTable
+                    ? 'table-canvas-table-selected'
+                    : 'table-canvas-table'
+                }
+                onClick={() => {
+                  ctx.setSelectTable?.(true);
+                }}
+              >
+                {dom}
+              </div>
+            );
+          }}
         />
       )}
     </div>

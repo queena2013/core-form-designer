@@ -32,11 +32,6 @@ const cellDetailFields: SchemaProps[] = [
     name: 'suffix',
   },
   {
-    type: 'BindFunction',
-    name: 'render',
-    label: '自定义渲染',
-  },
-  {
     type: 'Switch',
     name: 'ellipsis',
     valuePropName: 'checked',
@@ -75,7 +70,7 @@ const cellDetailFields: SchemaProps[] = [
     return {
       ...item,
       effect: ['useThousandth'],
-      isShow({ useThousandth }) {
+      visible({ useThousandth }) {
         return useThousandth;
       },
     };
@@ -86,30 +81,31 @@ const cellDetailFields: SchemaProps[] = [
     valuePropName: 'checked',
     label: '是否展示成链接',
   },
+  {
+    type: 'BindFunction',
+    name: 'render',
+    label: '自定义渲染',
+  },
 ];
 /**
  * 列明细信息编辑
  */
 const drawerCellForm = CreateForm.Drawer({
-  schema: cellDetailFields,
   width: 400,
+  schema: cellDetailFields,
+  containId: 'table-cell-drawer',
   widgets: {
     BindFunction,
   },
   drawerProps: {
     mask: false,
-    footer: false,
     headerStyle: {
       height: 43.5,
     },
     style: {
-      top: 35,
-      right: 400,
-      height: 'calc(100% - 57px)',
+      top: 65,
+      height: 'calc(100% - 65px)',
     },
-  },
-  getPopupContainer: () => {
-    return document.querySelector('#table-cell-props-config');
   },
 });
 
@@ -128,14 +124,10 @@ const cellFields: SchemaProps<{}>[] = [
         {
           key: 'edit',
           label: '修改',
-          onClick: (item, onCellChange) => {
-            try {
-              drawerCellForm.close();
-              // eslint-disable-next-line no-empty
-            } catch (error) {}
+          onClick: (record, onCellChange) => {
             drawerCellForm.open({
-              title: item.title,
-              initialValues: item,
+              title: record.title,
+              initialValues: record,
               onValuesChange: (v: any) => {
                 const k = Object.keys(v)[0];
                 onCellChange(v[k], k);

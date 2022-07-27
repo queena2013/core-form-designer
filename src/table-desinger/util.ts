@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
-import { cloneDeep, getCleanCloneSchema } from '@/util';
+import { babelParse } from '@/tools';
+import { cloneDeep, decrypt, getCleanCloneSchema } from '@/util';
 /**
  * 克隆一份
  */
@@ -18,17 +19,6 @@ export const getStandardSchema = (scurce = {}) => {
 
 /** 模型转换给Table */
 export const parseTableSchema = (values: any = {}) => {
-  /** tools 组装 */
-  if (values.useRefresh) {
-    values.tools.push({
-      type: 'Refresh',
-    });
-  }
-  if (values.useFilterColumns) {
-    values.tools.push({
-      type: 'FilterColumns',
-    });
-  }
   // 过滤undefined
   values.tools = values.tools?.filter((i) => i);
   /** 分页组装 */
@@ -59,9 +49,33 @@ export const parseTableSchema = (values: any = {}) => {
       );
     },
   };
+  /**
+   * 函数的解析
+   */
+  if (values.request) {
+    try {
+      values.request = babelParse(decrypt(values.request, false));
+    } catch (error) {
+      console.log('request 解析异常->', error);
+    }
+  }
+  if (values.toolsClick) {
+    try {
+      values.toolsClick = babelParse(decrypt(values.toolsClick, false));
+    } catch (error) {
+      console.log('toolsClick 解析异常->', error);
+    }
+  }
+  if (values.rowOperationsClick) {
+    try {
+      values.rowOperationsClick = babelParse(
+        decrypt(values.rowOperationsClick, false),
+      );
+    } catch (error) {
+      console.log('rowOperationsClick 解析异常->', error);
+    }
+  }
   /** 删除无效属性 */
-  delete values.useRefresh;
-  delete values.useFilterColumns;
   delete values.showMore;
   delete values.width;
   delete values.pageSize;

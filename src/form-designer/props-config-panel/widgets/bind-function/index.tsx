@@ -12,7 +12,6 @@ import './index.less';
 const codeModal = CreateForm.Modal({
   className: 'function-data-modal',
   title: '编写函数',
-  drag: true,
   width: 600,
   modalProps: {
     maskClosable: false,

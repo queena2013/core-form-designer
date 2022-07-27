@@ -50,7 +50,7 @@ export default ({
           }}
           onMount={onMount}
           schema={ItemPropsConfig}
-          initialValues={ctx.selectField || {}}
+          initialValues={ctx.selectSchema || {}}
           onValuesChange={onItemValuesChange}
         />
       </div>
@@ -65,7 +65,7 @@ export default ({
             BindFunction,
           }}
           schema={propsConfig}
-          initialValues={ctx.selectField?.props || {}}
+          initialValues={ctx.selectSchema?.props || {}}
           onValuesChange={onWidgetValuesChange}
         />
       </div>

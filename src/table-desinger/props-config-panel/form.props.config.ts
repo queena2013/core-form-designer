@@ -47,32 +47,6 @@ const fields: SchemaProps<{
           label: 'vertical',
           value: 'vertical',
         },
-        {
-          label: 'horizontal',
-          value: 'horizontal',
-        },
-      ],
-    },
-  },
-  {
-    type: 'RadioGroup',
-    name: 'size',
-    label: '尺寸大小',
-    props: {
-      optionType: 'button',
-      options: [
-        {
-          label: 'small',
-          value: 'small',
-        },
-        {
-          label: 'middle',
-          value: 'middle',
-        },
-        {
-          label: 'large',
-          value: 'large',
-        },
       ],
     },
   },

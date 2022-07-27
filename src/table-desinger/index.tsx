@@ -14,12 +14,36 @@ const Container = (props: any, ref: any) => {
   // 统一管理FormProps
   const [formProps, setFormProps] = useState({
     column: 3,
-    layout: 'inline',
-    size: 'middle',
     hidden: false,
+    layout: 'inline',
   });
+  // 统一管理 schema
+  const [schema, setSchema] = useState([]);
+  // 统一管理选中的 schema
+  const [selectSchema, setSelectSchema] = useState({});
   // 统一管理 columns
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState([
+    {
+      title: '用户姓名',
+      dataIndex: 'userName',
+      width: 200,
+    },
+    {
+      title: '联系方式',
+      dataIndex: 'userPhone',
+      width: 200,
+    },
+    {
+      title: '用户年龄',
+      dataIndex: 'userAge',
+      width: 200,
+    },
+    {
+      title: '详细地址',
+      dataIndex: 'userAddress',
+      width: 200,
+    },
+  ]);
   // 统一管理 TableProps
   const [tableProps, setTableProps] = useState<TableProps>();
   const [selectTable, setSelectTable] = useState(false);
@@ -32,10 +56,6 @@ const Container = (props: any, ref: any) => {
   const [widgets, setWidgets] = useState<{
     __originalConfig__?: object[]; // 部件的配置项模型
   }>({});
-  // 统一管理 schema
-  const [schema, setSchema] = useState([]);
-  // 统一管理选中的 schema
-  const [selectSchema, setSelectSchema] = useState({});
   useEffect(() => {
     if (!isEmpty(selectSchema)) {
       setSelectTable(false);
