@@ -45,7 +45,9 @@ const Container = (props: any, ref: any) => {
     },
   ]);
   // 统一管理 TableProps
-  const [tableProps, setTableProps] = useState<TableProps>();
+  const [tableProps, setTableProps] = useState<TableProps>({
+    title: '用户列表',
+  } as any);
   const [selectTable, setSelectTable] = useState(false);
   useEffect(() => {
     if (selectTable) {

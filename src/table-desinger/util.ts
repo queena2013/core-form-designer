@@ -19,6 +19,10 @@ export const getStandardSchema = (scurce = {}) => {
 
 /** 模型转换给Table */
 export const parseTableSchema = (values: any = {}) => {
+  /** 工具栏 */
+  if (values.useDefaultTools === true) {
+    values.defaultTools = [];
+  }
   // 过滤undefined
   values.tools = values.tools?.filter((i) => i);
   /** 分页组装 */

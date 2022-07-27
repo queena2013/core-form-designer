@@ -26,7 +26,7 @@ const fields: SchemaProps<{
     type: 'Switch',
     name: 'useDefaultTools',
     valuePropName: 'checked',
-    label: '启用默认操作栏',
+    label: '关闭默认操作栏',
   },
   {
     type: 'FormList',
