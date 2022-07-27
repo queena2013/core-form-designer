@@ -3,11 +3,11 @@
 ## FormDesigner 表单设计器
 
 ```tsx
-import React, { useRef } from 'react';
+import React from 'react';
 import { FormDesigner } from 'react-core-form-designer';
 
 export default () => {
-  const formDesignerRef: any = useRef({});
+  const formDesignerRef = React.useRef({});
   return (
     <FormDesigner ref={formDesignerRef}>
       <FormDesigner.RegisterWidgets />
@@ -25,8 +25,9 @@ import React from 'react';
 import { TableDesigner } from 'react-core-form-designer';
 
 export default () => {
+  const tableDesignerRef = React.useRef({});
   return (
-    <TableDesigner>
+    <TableDesigner ref={tableDesignerRef}>
       <TableDesigner.RegisterWidgets />
       <TableDesigner.TableCanvas />
       <TableDesigner.PropsConfigPanel />
