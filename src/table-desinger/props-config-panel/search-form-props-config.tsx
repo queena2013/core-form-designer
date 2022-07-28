@@ -1,10 +1,13 @@
 import { Form } from 'react-core-form';
 import { Segmented } from 'antd';
+import {
+  JsonData,
+  BindFunction,
+} from '@/form-designer/props-config-panel/widgets';
 
 export default ({
   setCompontentType,
   compontentType,
-  BindFunction,
   FormPropsConfig,
   onFormValuesChange,
   onMount,
@@ -63,6 +66,7 @@ export default ({
         <Form
           widgets={{
             BindFunction,
+            JsonData,
           }}
           schema={propsConfig}
           initialValues={ctx.selectSchema?.props || {}}

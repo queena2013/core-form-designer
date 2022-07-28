@@ -1,10 +1,10 @@
 import { Form } from 'react-core-form';
 import { Segmented } from 'antd';
+import { BindFunction } from '@/form-designer/props-config-panel/widgets';
 
 export default ({
   tableType,
   setTableType,
-  BindFunction,
   TableList,
   TablePropsConfig,
   onTableValuesChange,

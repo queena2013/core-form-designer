@@ -9,7 +9,6 @@ import TablePropsConfig from './table.props.config';
 import CellPropsConfig from './table.cell.props.config';
 import SearchFormPropsConfig from './search-form-props-config';
 import SearchTablePropsConfig from './search-table-props-config';
-import { BindFunction } from '@/form-designer/props-config-panel/widgets';
 import { debounce } from 'lodash';
 import './index.less';
 
@@ -108,7 +107,6 @@ export default ({
       {...{
         tableType,
         setTableType,
-        BindFunction,
         TableList,
         TablePropsConfig,
         onTableValuesChange,
@@ -122,7 +120,6 @@ export default ({
       {...{
         setCompontentType,
         compontentType,
-        BindFunction,
         FormPropsConfig,
         onFormValuesChange,
         onMount,
